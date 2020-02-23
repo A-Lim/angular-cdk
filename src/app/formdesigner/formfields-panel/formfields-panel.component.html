@@ -1,0 +1,62 @@
+<div class="card" style="min-height: 200px;">
+    <div class="card-body">
+        <div (onclick)="onFormFocus()">
+            <h2>Form</h2>
+        </div>
+        
+        <div class="formfields-list"
+            cdkDropList
+            #doneList="cdkDropList"
+            (cdkDropListDropped)="onDropped($event)">
+
+            <!-- <ng-container *ngFor="let formField of parentFormFields">
+                <ng-container [ngSwitch]="formField.fieldType.fieldTypeID" > -->
+                    <div class="card" 
+                        [ngClass]="{ 
+                            'selected-form-field': selectedFormField?.formFieldID == formField.formFieldID,
+                            'searched-form-field': searchStr && formField.fieldCode.toLowerCase().includes(searchStr?.toLowerCase())
+                        }"
+                        (click)="onFormFieldFocus(formField.formFieldID)"
+                        *ngFor="let formField of parentFormFields" 
+                        cdkDrag [cdkDragData]="formField">
+                        <div class="example-custom-placeholder" *cdkDragPlaceholder></div>
+                        <ng-container [ngSwitch]="formField.fieldType.fieldTypeID" >
+                            <app-zone *ngSwitchCase="4" [formField]=formField></app-zone>
+
+                            <div *ngSwitchDefault class="card-body">
+                                {{ formField.fieldCode }}
+                            </div>
+                        </ng-container>
+                        
+                    </div>
+                <!-- </ng-container>
+            </ng-container> -->
+
+            
+        </div>
+
+        <!-- <div class="formfields-list"
+            cdkDropList
+            #doneList="cdkDropList"
+            (cdkDropListDropped)="onDropped($event)">
+
+            <ng-container *ngFor="let formField of parentFormFields">
+                <ng-container [ngSwitch]="formField.fieldType.fieldTypeID" >
+                    <div *ngSwitchDefault class="card" 
+                        [ngClass]="{ 
+                            'selected-form-field': selectedFormField?.formFieldID == formField.formFieldID,
+                            'searched-form-field': searchStr && formField.fieldCode.toLowerCase().includes(searchStr?.toLowerCase())
+                        }"
+                        (click)="onFormFieldFocus(formField.formFieldID)"
+                        cdkDrag [cdkDragData]="formField">
+                        <div class="example-custom-placeholder" *cdkDragPlaceholder></div>
+                        <div class="card-body">
+                            {{ formField.fieldCode }}
+                        </div>
+                    </div>
+                </ng-container>
+            </ng-container>
+        </div> -->
+
+    </div>
+</div>

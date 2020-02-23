@@ -1,0 +1,47 @@
+<!-- <div class="formfields-list"
+    cdkDropList
+    #doneList="cdkDropList"
+    (cdkDropListDropped)="onDropped($event)">
+    <div class="card" 
+        [ngClass]="{ 
+            'selected-form-field': selectedFormField?.formFieldID == formField.formFieldID,
+            'searched-form-field': searchStr && formField.fieldCode.toLowerCase().includes(searchStr?.toLowerCase())
+        }"
+        (click)="onFormFieldFocus(formField.formFieldID)"
+        *ngFor="let formField of parentFormFields" 
+        cdkDrag [cdkDragData]="formField">
+        <div class="example-custom-placeholder" *cdkDragPlaceholder></div>
+        <div class="card-body">
+            {{ formField.fieldCode }}
+        </div>
+    </div>
+</div> -->
+<div class="card" style="background-color: inherit;">
+    <div class="card-body">
+        {{ formField.fieldCode }}
+        <div class="row">
+            <ng-container *ngFor="let el of [].constructor(formField.zoneProperties.columns); let i = index">
+                <div class="card col-md-{{ 12 / formField.zoneProperties.columns }}" style="min-height: 200px;">
+                    <div class="formfields-list"
+                        cdkDropList
+                        #doneList="cdkDropList"
+                        (cdkDropListDropped)="onDropped($event, i + 1)">
+                        <div class="card" 
+                            [ngClass]="{ 
+                                'selected-form-field': selectedFormField?.formFieldID == formField.formFieldID,
+                                'searched-form-field': searchStr && formField.fieldCode.toLowerCase().includes(searchStr?.toLowerCase())
+                            }"
+                            (click)="onFormFieldFocus(formField.formFieldID)"
+                            *ngFor="let formField of parentFormFields" 
+                            cdkDrag [cdkDragData]="formField">
+                            <div class="example-custom-placeholder" *cdkDragPlaceholder></div>
+                            <div class="card-body">
+                                {{ formField.fieldCode }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </ng-container>
+        </div>
+    </div>
+</div>

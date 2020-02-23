@@ -1,0 +1,13 @@
+<div class="fieldtypes-panel" 
+        cdkDropList
+        cdkDropListConnectedTo="[formfields-panel]"
+        >
+    <div class="fieldtypes card mb-2" *ngFor="let fieldType of fieldTypes$ | async"
+        cdkDrag
+        [cdkDragData]="fieldType" > 
+        <div class="example-custom-placeholder" *cdkDragPlaceholder></div>
+        <div class="card-body">
+            {{ fieldType.label }}
+        </div>
+    </div>
+</div>
